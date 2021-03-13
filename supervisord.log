@@ -2,3 +2,7 @@
 2021-03-13 09:42:54,675 INFO supervisord started with pid 16
 2021-03-13 09:42:55,677 INFO spawned: 'php' with pid 18
 2021-03-13 09:42:57,475 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-03-13 10:29:17,108 INFO Set uid to user 0 succeeded
+2021-03-13 10:29:17,110 INFO supervisord started with pid 19
+2021-03-13 10:29:18,112 INFO spawned: 'php' with pid 21
+2021-03-13 10:29:19,886 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)

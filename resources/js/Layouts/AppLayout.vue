@@ -20,13 +20,14 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('admin.users')" :active="route().current('admin.users')">
+                                
+                                <jet-nav-link :href="route('admin.users')" :active="route().current('admin.users')" v-if="$page.props.user.role_id == 1">
                                     admin.users
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('admin.roles')" :active="route().current('admin.roles')">
+                                <jet-nav-link :href="route('admin.roles')" :active="route().current('admin.roles')" v-if="$page.props.user.role_id == 1">
                                     admin.roles
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('admin.messages')" :active="route().current('admin.messages')">
+                                <jet-nav-link :href="route('admin.messages')" :active="route().current('admin.messages')" v-if="$page.props.user.role_id == 1">
                                     admin.messages
                                 </jet-nav-link>
                             </div>

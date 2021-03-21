@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Middleware\isAdmin;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //admin Routes
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin/users', [UserController::class, 'index'])->name('admin.users');
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin/roles', [RoleController::class, 'index'])->name('admin.roles');
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin/messages', [MessageController::class, 'index'])->name('admin.messages');
+Route::middleware(['auth:sanctum', 'verified','isAdmin'])->get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+Route::middleware(['auth:sanctum', 'verified','isAdmin'])->get('/admin/roles', [RoleController::class, 'index'])->name('admin.roles');
+Route::middleware(['auth:sanctum', 'verified','isAdmin'])->get('/admin/messages', [MessageController::class, 'index'])->name('admin.messages');

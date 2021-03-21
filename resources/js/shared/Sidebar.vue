@@ -19,7 +19,7 @@ export default {
     return {
         links: {
             home: "/",
-            profile: "/profile",
+            profile: "profile",
             explore: "/explore",
             settings: "/settings"
         }

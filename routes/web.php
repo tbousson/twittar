@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
 
 
 
@@ -44,7 +45,7 @@ Route::middleware(['auth:sanctum', 'verified','isAdmin'])->get('/admin/messages'
 
 //User Routes
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/profile', function () {
-    return Inertia::render('Profile');
+Route::middleware(['auth:sanctum', 'verified'])->get('/profile', [FrontController::class, 'profile'])->name('profile');
+Route::middleware(['auth:sanctum', 'verified'])->get('/settings', function () {
+    return redirect('/user/profile');
 });
-

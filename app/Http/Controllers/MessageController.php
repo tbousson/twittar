@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use App\Models\Comment;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -18,7 +19,7 @@ class MessageController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Messages', [
-            'messages' => Auth::user()->messages
+            'messages' => Message::with('user')->withTrashed()->get()
         ]);
     }
 

@@ -9,11 +9,10 @@
         <div class="">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-5">
-                   <user-info :user="user"></user-info>
-                    <message-container :messages="messages" :user="user">
+                  <user-info :user="user"></user-info>
+                   <message-container :messages="data" :user="user">
 
                     </message-container>
-                
                 </div>
             </div>
         </div>
@@ -26,14 +25,18 @@
     import MessageContainer from '@/Components/MessageContainer'
 
     export default {
+        data () {
+        return {
+          
+        }
+        },
         components: {
             FrontLayout,
             UserInfo,
             MessageContainer
         },
         props: [
-            'messages',
-            'user'
+            'data', 'user'
         ]
        
     }

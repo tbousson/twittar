@@ -46,6 +46,11 @@ Route::middleware(['auth:sanctum', 'verified','isAdmin'])->get('/admin/messages'
 //User Routes
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/profile', [FrontController::class, 'profile'])->name('profile');
+Route::middleware(['auth:sanctum', 'verified'])->get('/explore', [FrontController::class, 'explore']
+)->name('explore');
 Route::middleware(['auth:sanctum', 'verified'])->get('/settings', function () {
     return redirect('/user/profile');
 });
+Route::middleware(['auth:sanctum', 'verified'])->get('/{displayName}', [FrontController::class, 'userPage']
+);
+

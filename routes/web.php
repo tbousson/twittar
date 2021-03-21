@@ -3,7 +3,9 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +29,11 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+
+//admin Routes
+
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin/roles', [RoleController::class, 'index'])->name('admin.roles');
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin/messages', [MessageController::class, 'index'])->name('admin.messages');

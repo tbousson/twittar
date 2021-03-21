@@ -20,4 +20,8 @@ class Message extends Model
     public function comments () {
         return $this->hasMany(Comment::class);
     }
+
+    public function likes () {
+        return $this->morphToMany(User::class, 'likable', 'likes')->whereDeletedAt(null);
+    }
 }

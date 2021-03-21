@@ -16,7 +16,23 @@ class MessageSeeder extends Seeder
     {
         DB::table('messages')->insert([
             'content' => 'This is a test message',
-            'user_id' => '1'
+            'user_id' => 1
+        ]);
+        DB::table('messages')->insert([
+            'content' => 'This is a another message',
+            'user_id' => 1
+        ]);
+        DB::table('messages')->insert([
+            'content' => 'This is a third message',
+            'user_id' => 1
+        ]);
+        DB::table('messages')->insert([
+            'content' => 'This is a fourth message',
+            'user_id' => 1
+        ]);
+        DB::table('messages')->insert([
+            'content' => 'This is a blbal message',
+            'user_id' => 1
         ]);
     }
 }

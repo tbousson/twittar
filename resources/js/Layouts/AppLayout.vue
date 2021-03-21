@@ -20,6 +20,15 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('admin.users')" :active="route().current('admin.users')">
+                                    admin.users
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('admin.roles')" :active="route().current('admin.roles')">
+                                    admin.roles
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('admin.messages')" :active="route().current('admin.messages')">
+                                    admin.messages
+                                </jet-nav-link>
                             </div>
                         </div>
 
@@ -142,6 +151,10 @@
                     <div class="pt-2 pb-3 space-y-1">
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </jet-responsive-nav-link>
+
+                        <jet-responsive-nav-link :href="route('admin.messages')" :active="route().current('admin.messages')">
+                            Messages
                         </jet-responsive-nav-link>
                     </div>
 

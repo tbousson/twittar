@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Message;
-use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class MessageController extends Controller
+class UserController extends Controller
 {
-    /**
+  /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Inertia::render('Admin/Messages', [
-            'messages' => Auth::user()->messages
+        return Inertia::render('Admin/Users', [
+            'users' => User::all()
         ]);
     }
 
@@ -40,7 +38,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        //
     }
 
     /**

@@ -20,4 +20,9 @@ class Comment extends Model
     public function user () {
         return $this->belongsTo(User::class);
     }
+
+    public function likes () {
+        return $this->morphToMany(User::class, 'likable', 'likes')->whereDeletedAt(null);
+    }
+
 }

@@ -7,33 +7,84 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
 {
+
+    public function home () 
+    {
+        $data = Message::with([
+            'user' => function($query){
+                $query->select('id','name','displayName','profile_photo_path'); 
+            }])->withCount('comments')    
+            ->orderBy('created_at','DESC')->get();
+        //query select fields id,name,displayName from user relation
+        //withCount gets the ammount of comments
+        //OrderBy created_at, desc -> eerste nieuwste dan oudere messages
+        
+        return Inertia::render('Home', [
+            'data' => $data
+        ]);
+    }
+    
+
     public function profile()
     {
-        $user = User::where('id', Auth::user()->id)->get(['name','displayName','profile_photo_path']);
+        $user = Auth::user();
+        $data = Message::where('user_id', $user->id)->with([
+            'user' => function($query){
+                $query->select('id','name','displayName','profile_photo_path'); 
+            }])->withCount('comments')    
+            ->orderBy('created_at','DESC')->get();
+        //query select fields id,name,displayName from user relation
+        //withCount gets the ammount of comments
+        //OrderBy created_at, desc -> eerste nieuwste dan oudere messages
         return Inertia::render('Profile', [
-            'messages' => Auth::user()->messages,
-            'user' => $user[0]
+            'data' => $data,
+            'user' => $user
         ]);
     }
 
     public function userPage ($displayName) {
-        $user = User::where('displayName', $displayName)->get(['id','name','displayName','profile_photo_path']);
-        $id = $user[0]->id;
+        $id = User::where('displayName', $displayName)->get(['id']);
+        $id = $id[0]->id;
+        $user = User::findOrFail($id);
+        $data = Message::where('user_id', $id)->with([
+            'user' => function($query){
+                $query->select('id','name','displayName','profile_photo_path'); 
+            }])->withCount('comments')    
+            ->orderBy('created_at','DESC')->get();
+        //query select fields id,name,displayName from user relation
+        //withCount gets the ammount of comments
+        //OrderBy created_at, desc -> eerste nieuwste dan oudere messages
         return Inertia::render('UserPage', [
-            'data' => Message::where('user_id', $id)->get(),
-            'user' => $user[0]
+            'data' => $data,
+            'user' => $user
+            
         ]);
     }
     public function explore()
     {
+        $data = Message::query()
+        ->with(array('user' => function($query) {
+                        $query->select('id','name','displayName','profile_photo_path');
+                    }))->withCount('comments')->orderBy('created_at','DESC')->get();
         return Inertia::render('Explore', [
-            'data' => Message::query()
-                        ->with(array('user' => function($query) {
-                                        $query->select('id','name','displayName');
-                                    }))->orderBy('created_at','DESC')->get()
+            'data' => $data
         ]);
+    }
+
+    public function createMessage (Request $request) {
+        Validator::make($request->all(), [
+            'content' => ['required'],
+        ])->validate();
+
+        $message = new Message;
+        $message->content = $request->content;
+        $message->user_id = Auth::user()->id;
+        $message->save();  
+
+        return redirect()->back();
     }
 }

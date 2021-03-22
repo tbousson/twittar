@@ -22,7 +22,7 @@ class MessageFactory extends Factory
     public function definition()
     {
         return [
-            'content' => $this->faker->sentence(5),
+            'content' => $this->faker->sentence(20),
         ];
     }
 }

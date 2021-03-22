@@ -2,6 +2,7 @@
   <!-- component -->
     <div class="w-full md:w-full">
         <div class="bg-white shadow-md rounded my-6 px-2">
+            
             <table class="min-w-max w-full table-auto">
                 <thead>
                     <tr class="bg-gray-200 text-gray-800 uppercase text-sm leading-normal" >
@@ -22,13 +23,19 @@
                         </td>
                          <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
-                                {{d.user.displayName}}
+                                {{d.displayName}}
                                     
                             </div>
                         </td>
                          <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
-                                {{d.content}}
+                                {{d.name}}
+                                    
+                            </div>
+                        </td>
+                         <td class="py-3 px-6 text-left">
+                            <div class="flex items-center">
+                                {{d.email}}
                                     
                             </div>
                         </td>

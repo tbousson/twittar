@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Comment;
+use App\Models\Message;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,9 +23,12 @@ class DatabaseSeeder extends Seeder
             CommentSeeder::class,
             LikeSeeder::class,
         ]);
-        User::factory()
+        $user = User::factory()
             ->count(50)
-            ->hasMessages(2)
+            ->has(Message::factory()->count(10))
             ->create();
+       
+       Comment::factory()->count(1000)->create();
+       
     }
 }

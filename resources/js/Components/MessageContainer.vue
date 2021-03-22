@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-      <message v-for="message in messages" :key="message.id" :user="user" :message="message"></message>
+      <message v-for="message in data" :key="message.id" :user="user" :message="message"></message>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
         Message
     },
     props: [
-        'messages',
+        'data',
         'user'
     ]
 }

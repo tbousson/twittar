@@ -15,6 +15,10 @@ class Comment extends Model
         'content'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y - H:m',
+    ];
+
     public function message () {
         return $this->belongsTo(Message::class);
     }

@@ -11,9 +11,7 @@
                 <div class="bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-5">
                   <user-info :user="user"></user-info>
                    <message-container :data="data" :user="user">
-
                     </message-container>
-                    {{user}}{{data}}
                 </div>
             </div>
         </div>

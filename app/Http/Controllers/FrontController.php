@@ -31,8 +31,9 @@ class FrontController extends Controller
 
     public function profile()
     {
-        $user = Auth::user();
-        $data = Message::where('user_id', $user->id)->with([
+        $id = Auth::user()->id;
+        $user = User::select('id','name','displayName')->withCount(['followings','followers'])->findOrFail($id);
+        $data = Message::where('user_id', $id)->with([
             'user' => function($query){
                 $query->select('id','name','displayName','profile_photo_path'); 
             }])->withCount('comments')    
@@ -48,8 +49,9 @@ class FrontController extends Controller
 
     public function userPage ($displayName) {
         $id = User::where('displayName', $displayName)->get(['id']);
+       
         $id = $id[0]->id;
-        $user = User::findOrFail($id);
+        $user = User::withCount(['followers','followings'])->findOrFail($id);
         $data = Message::where('user_id', $id)->with([
             'user' => function($query){
                 $query->select('id','name','displayName','profile_photo_path'); 
@@ -86,5 +88,21 @@ class FrontController extends Controller
         $message->save();  
 
         return redirect()->back();
+    }
+
+    public function MessagePage ($displayName,$id) {
+        $message = Message::with([
+            'comments' => function($query) {
+                $query->with(['user' => function ($query) { $query->select('id','name','displayName','profile_photo_path');
+                }]);
+             },
+            'user' => function($query) {
+                $query->select('id','name','displayName','profile_photo_path');
+            }
+        ])->withCount('Comments')->findOrFail($id);
+        
+        return Inertia::render('MessagePage', [
+            'message' => $message,
+        ]);
     }
 }

@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Overtrue\LaravelFollow\FollowServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+
 
     ],
 

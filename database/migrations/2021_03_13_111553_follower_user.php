@@ -26,6 +26,6 @@ class FollowerUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('follower_user');
     }
 }

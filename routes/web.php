@@ -51,8 +51,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/explore', [FrontControlle
 Route::middleware(['auth:sanctum', 'verified'])->get('/settings', function () {
     return redirect('/user/profile');
 });
+Route::middleware(['auth:sanctum', 'verified'])->get('/{displayName}/{id}', [FrontController::class, 'messagePage']
+);
 Route::middleware(['auth:sanctum', 'verified'])->get('/{displayName}', [FrontController::class, 'userPage']
 );
+
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/createMessage', [FrontController::class, 'createMessage']
 );
